@@ -53,22 +53,6 @@
  *
 */
 
-// Build menu
-
-// Scroll to section on link click
-
-// Set sections as active
-
-/*var navbar = document.getElementById('navbar__list');
-navbar.innerHTML = `
-<li><a href="#section1" class="menu__link">Section 1</a></li>
-<li><a href="#section2" class="menu__link">Section 2</a></li>
-<li><a href="#section3" class="menu__link">Section 3</a></li>
-<li><a href="#section4" class="menu__link">Section 4</a></li>
-<li><a href="#section5" class="menu__link">Section 5</a></li>
-`;
-*/
-
 
 const allSections = document.querySelectorAll("section");
 console.log(allSections);
@@ -80,12 +64,15 @@ for (let oneSection of allSections) {
     let li = document.createElement('li');
     let navLink = document.createElement('A');
     navLink.href = `${oneSection.id}`;
+    navLink.id = `section-${oneSection.id}-selector`;
+    console.log(navLink.id);
     navLink.textContent = oneSection.dataset.nav;
     navLink.classList.add("menu__link");
     navLink.addEventListener("click", e => {
         e.preventDefault();
         oneSection.scrollIntoView({ behavior: "smooth" });
         if (activeSec) {
+            section.classList.remove('your-active-class')
         }
         oneSection.classList.add("your-active-class")
         console.log(oneSection);
@@ -107,38 +94,7 @@ for (var i = 0; i < menu_item.length; i++) {
         this.classList.add('active');
     });
 }
-/*
-let navItems = document.querySelectorAll("li");
-console.log(navItems);
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.7,
-};
 
-function observerCallback(entries, observer) {
-    entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            // get the nav item corresponding to the id of the section
-            // that is currently in view
-            const navItem = navItems[entry.target.id];
-            // add 'active' class on the navItem
-            navItem.classList.add('active');
-            // remove 'active' class from any navItem that is not
-            // same as 'navItem' defined above
-            Object.values(navItems).forEach((item) => {
-                if (item != navItem) {
-                    item.classList.remove('active');
-                }
-            });
-        }
-    });
-}
-
-const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-sections.forEach((sec) => observer.observe(sec));
-*/
 console.log(allSections);
 function active(section) {
     const activeElement = section.getBoundingClientRect();
@@ -146,14 +102,14 @@ function active(section) {
 } function makeActive() {
     for (const section of allSections) {
         console.log(section);
-        let links = document.querySelectorAll(`a[href="#${section.id}"]`);
-        console.log(links);
+        let link = document.querySelector(`a#section-${section.id}-selector`);
+        console.log(link.id);
         if (active(section)) {
             section.classList.add("your-active-class");
-            //link.classList.add("active");
+            link.classList.add("active");
         } else {
             section.classList.remove("your-active-class");
-            // link.classList.remove("active");
+            link.classList.remove("active");
         }
     }
 }
