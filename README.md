@@ -15,4 +15,4 @@ Ahmed Abosamra
 ### Resource:
 1. https://www.w3schools.com/js/default.asp
 2. https://developer.mozilla.org/en-US/docs/Web/JavaScript
-
+3. https://nfpdiscussions.udacity.com/
